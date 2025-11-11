@@ -63,14 +63,6 @@ nextflow run main.nf -resume -profile singularity \
                     --sqanti_dir /scratch/nadjafn/sqanti3/SQANTI3 \
                     -bg --technology ONT --downsample_rate 0.99  --skip_sqanti
 
-nextflow run main.nf -resume -profile singularity \
-                    --input assets/samplesheet_atlantic.csv \
-                    --outdir output_atlantic_liftoff \
-                    --fasta /scratch/nadjafn/reference/Atlantic/ATL_v3.asm.with_chloroplast_and_mito.fa \
-                    --gtf  /scratch/nadjafn/reference/Atlantic/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf \
-                    --centrifuge_db /biodbs/centrifuge/dbs_v2018/ \
-                    --sqanti_dir /scratch/nadjafn/sqanti3/SQANTI3 \
-                    -bg --technology ONT
 
 
 #### Wheat AK58 example
@@ -94,3 +86,20 @@ nextflow run main.nf -resume -profile singularity \
                     --centrifuge_db /biodbs/centrifuge/dbs_v2018/ \
                     --sqanti_dir /scratch/nadjafn/sqanti3/SQANTI3 \
                     -bg --technology ONT --downsample_rate 0.1 --skip_sqanti
+
+
+
+nextflow run main.nf -profile singularity \
+                    --input assets/samplesheet_rice_Nip_2samples.csv \
+                    --outdir output_rice_Nip_test \
+                    --fasta /scratch/nadjafn/LR_DESIREE_PAPER/ANALYSIS/rice_example/genome/Hap1_2_Nipponbare.renamed.organels.fasta \
+                    --gtf   /scratch/nadjafn/LR_DESIREE_PAPER/ANALYSIS/rice_example/genome/Hap1_2_Nipponbare.genome.renamed.organels.standard.gtf \
+                    --centrifuge_db /biodbs/centrifuge/dbs_v2018/ \
+                    --sqanti_dir /scratch/nadjafn/sqanti3/SQANTI3 \
+                    -bg --technology ONT --downsample_rate 0.01 
+
+
+
+# count novel transcripts
+
+grep -o -e "BambuTx[0-9_]*" *.gtf | sort | uniq | wc -l 

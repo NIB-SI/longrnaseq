@@ -57,12 +57,6 @@ workflow QUANTIFY_PSEUDO_ALIGNMENT {
                         .join(TXIMETA_TXIMPORT.out.tpm_gene)
                         .map{tuple(it[0], it.tail())}
 
-    // SE_GENE_UNIFIED (
-    //     ch_gene_unified,
-    //     CUSTOM_TX2GENE.out.tx2gene,
-    //     samplesheet
-    // )
-    // ch_versions = ch_versions.mix(SE_GENE_UNIFIED.out.versions)
 
     ch_transcript_unified = TXIMETA_TXIMPORT.out.counts_transcript
                         .join(TXIMETA_TXIMPORT.out.lengths_transcript)
@@ -71,12 +65,6 @@ workflow QUANTIFY_PSEUDO_ALIGNMENT {
 
 
 
-    // SE_TRANSCRIPT_UNIFIED (
-    //     ch_transcript_unified,
-    //     CUSTOM_TX2GENE.out.tx2gene,
-    //     samplesheet
-    // )
-    // ch_versions = ch_versions.mix(SE_TRANSCRIPT_UNIFIED.out.versions)
 
     emit:
     results                       = ch_pseudo_results                              // channel: [ val(meta), results_dir ]

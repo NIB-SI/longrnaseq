@@ -173,17 +173,6 @@ workflow PLANTLONGRNASEQ {
     ch_multiqc_files = ch_multiqc_files.mix(CENTRIFUGE_KREPORT.out.kreport.collect{it[1]})
 
     ////// TRANSCRIPT RECONSTRUCTION AND QUANTIFICATION
-    //
-    // MODULE: Manipulate MAPQ values in BAM files as it seems
-    //         BAMBU does not consider reads with MAPQ values of 0
-    //
-
-    // SAMTOOLS_MANIPULATION (
-    //             MINIMAP2_ALIGN_GENOME.out.bam,
-    //             ch_fasta.map { [ [:], it ] },
-    //             [], // qname
-    //             'csi' // index_format
-    //             )
 
     // SUBWORKFLOW: Run novel transcript identification with BAMBU and liftoff
     NOVEL_TRANSCRIPT_IDENTIFICATION(
@@ -191,7 +180,7 @@ workflow PLANTLONGRNASEQ {
                     ch_fasta,
                     ch_gtf
                     )
-    NOVEL_TRANSCRIPT_IDENTIFICATION.out.novel_gtf.view()
+
     //
     // SUBWORKFLOW: Run SQANTI on reads and BAMBU annotation
     //
@@ -265,8 +254,6 @@ workflow PLANTLONGRNASEQ {
         ch_versions = ch_versions.mix(DESEQ2_QC.out.versions.first())
 
     }
-
-
 
 
     //

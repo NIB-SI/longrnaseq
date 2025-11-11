@@ -80,11 +80,11 @@ workflow RUN_SQANTI_READS {
 
         emit:
         // TODO nf-core: edit emitted channels
-        gff       = SPLICEDBAM2GFF.out.gff          // channel: [ val(meta), [ gff ] ]
-        sqanti_qc = SQANTIQC.out.sqanti_qc         // channel: [ val(meta), [ qc ] ]
+        gff       = SPLICEDBAM2GFF.out.gff           // channel: [ val(meta), [ gff ] ]
+        sqanti_qc = SQANTIQC.out.sqanti_qc           // channel: [ val(meta), [ qc ] ]
         bam       = SAMTOOLS_FILTER.out.bam          // channel: [ val(meta), [ bam ], [ bai ] ]
-        multiqc   =  SQANTIREADS.out.multiqc   // channel: [ _mqc.png ]
-        versions  = ch_versions                     // channel: [ versions.yml ]
+        multiqc   =  SQANTIREADS.out.multiqc         // channel: [ _mqc.png ]
+        versions  = ch_versions                      // channel: [ versions.yml ]
 
     
 

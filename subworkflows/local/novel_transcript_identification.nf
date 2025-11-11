@@ -73,7 +73,8 @@ workflow NOVEL_TRANSCRIPT_IDENTIFICATION {
             [meta, fasta, gff]
         }
         .set { ch_liftoff_input }
-    ch_liftoff_input.view()
+
+
     LIFTOFF (
         ch_liftoff_input.map { meta, fasta, gff -> [meta, fasta] },
         ch_fasta,
@@ -81,12 +82,7 @@ workflow NOVEL_TRANSCRIPT_IDENTIFICATION {
         []
     )
     
-    // LIFTOFF (
-    //     ch_fasta.map { fasta -> [["id": fasta.simpleName], fasta]  },
-    //     ch_fasta, // just get the reference fasta from id, fasta channel
-    //     GAWK.out.output.map { it[1] },
-    //     []    
-    // )
+
     ch_versions = ch_versions.mix(LIFTOFF.out.versions.first())
 
     
@@ -109,8 +105,6 @@ workflow NOVEL_TRANSCRIPT_IDENTIFICATION {
             [meta, liftoff_list + [bambu_gtf]]  // Wrap bambu_gtf in a list
         }
 
-
-    ch_combined_gtf.view()
 
     // Run GFFCOMPARE with all files
     GFFCOMPARE (
