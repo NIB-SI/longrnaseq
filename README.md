@@ -31,19 +31,24 @@ For running Centrifuge, you also need to create a [Centrifuge database](https://
 
 
 ## Usage
-First, prepare a samplesheet with your input data that looks as follows:
+
+1) Clone the repository of the pipeline `git clone https://github.com/nadjano/longrnaseq.git`
+
+
+2) Prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
 ```csv
 sample,fastq_1
-SAMPLE1,sample1_R1.fastq.gz
-SAMPLE2,sample2_R1.fastq.gz
+SAMPLE1,sample1.fastq.gz
+SAMPLE2,sample2.fastq.gz
 ```
 
 Each row represents a sample with one fastq file.
 
 ## Running the Pipeline
+
 
 ### Required Parameters
 
@@ -122,3 +127,18 @@ You can cite the `nf-core` publication as follows:
 
 
 
+
+
+## Test Run
+
+Download from SRA the samples SRR14993893 and SRR14993893.
+
+/scratch/nadjafn/reference/Atlantic/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf
+download gtf file from zenodo: unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf
+
+and fasta: 
+
+/scratch/nadjafn/reference/Atlantic/ATL_v3.asm.with_chloroplast_and_mito.fa
+
+
+1) add to sample sheet
