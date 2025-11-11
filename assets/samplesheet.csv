@@ -1,3 +1,3 @@
-organism,fastq_1
-Atlantic,SRR14993893.fastq.gz
-Desiree,flnc-1.bam
+sample,fastq_1
+sample1,/scratch/nadjafn/polyase_test/test_data/SRR14993892.fastq.gz
+sample2,/scratch/nadjafn/polyase_test/test_data/SRR14993893.fastq.gz

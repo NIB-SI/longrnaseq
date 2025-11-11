@@ -156,21 +156,28 @@ workflow PLANTLONGRNASEQ {
     //
     // MODULE: Run Centrifuge
     //
-    CENTRIFUGE_CENTRIFUGE (
+
+    if (!params.centrifuge_db && !params.skip_centrifuge) {
+        error "Centrifuge database path not provided. Please provide --centrifuge_db parameter to run contamination check with Centrifuge."
+
+        CENTRIFUGE_CENTRIFUGE (
         SAMTOOLS_BAM2FQ.out.reads,
         params.centrifuge_db,
         false,
         false
-    )
+        )
+        ch_versions = ch_versions.mix(CENTRIFUGE_CENTRIFUGE.out.versions.first())
 
-    ch_versions = ch_versions.mix(CENTRIFUGE_CENTRIFUGE.out.versions.first())
+        CENTRIFUGE_KREPORT (
+            CENTRIFUGE_CENTRIFUGE.out.report,
+            params.centrifuge_db
+        )
 
-    CENTRIFUGE_KREPORT (
-        CENTRIFUGE_CENTRIFUGE.out.report,
-        params.centrifuge_db
-    )
+        ch_multiqc_files = ch_multiqc_files.mix(CENTRIFUGE_KREPORT.out.kreport.collect{it[1]})
+    }
 
-    ch_multiqc_files = ch_multiqc_files.mix(CENTRIFUGE_KREPORT.out.kreport.collect{it[1]})
+
+
 
     ////// TRANSCRIPT RECONSTRUCTION AND QUANTIFICATION
 
