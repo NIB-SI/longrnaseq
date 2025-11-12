@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    nf-core/plantlongrnaseq
+    nf-core/longrnaseq
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Github : https://github.com/nf-core/plantlongrnaseq
     Website: https://nf-co.re/plantlongrnaseq
@@ -24,7 +24,7 @@ nextflow.enable.dsl = 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { PLANTLONGRNASEQ  } from './workflows/plantlongrnaseq'
+include { LONGRNASEQ  } from './workflows/longrnaseq'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_plantlongrnaseq_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_plantlongrnaseq_pipeline'
 /*
@@ -47,13 +47,13 @@ workflow NFCORE_PLANTLONGRNASEQ {
     //
     // WORKFLOW: Run pipeline
     //
-    PLANTLONGRNASEQ (
+    LONGRNASEQ (
         samplesheet,
         params.fasta,
         params.gtf
     )
     emit:
-    multiqc_report = PLANTLONGRNASEQ.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = LONGRNASEQ.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

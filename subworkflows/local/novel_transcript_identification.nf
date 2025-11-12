@@ -33,7 +33,6 @@ workflow NOVEL_TRANSCRIPT_IDENTIFICATION {
     //
     // MODULE: Run BAMBU to reconstruct transcripts
     //
-    ch_fasta.view()
     BAMBU(
         ch_fasta,
         ch_gtf_for_bambu,
@@ -58,7 +57,7 @@ workflow NOVEL_TRANSCRIPT_IDENTIFICATION {
         GAWK.out.output  
 
     )
-    SPLIT_HAPLOTYPES.out.split_gffs.view()
+
     //
     // MODULE: Liftoff novel BAMBU isoforms to other haplotypes
     //
