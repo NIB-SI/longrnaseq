@@ -95,7 +95,9 @@ nextflow run main.nf -resume -profile singularity \
 
 ## Pipeline output
 
-The main output is a MultiQC.html, SQANTI-reads output and oarfish transcript and gene counts.
+The main output is a MultiQC.html and oarfish transcript and gene counts.
+
+An example MultiQC report can be found here: `example MultiQC report <https://github.com/nadjano/longrnaseq/blob/master/example_output/multiqc_report.html>`_
 
 
 ## Tutorial
