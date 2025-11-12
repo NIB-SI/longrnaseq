@@ -139,19 +139,19 @@ You can cite the `nf-core` publication as follows:
 For running the pipeline on a HPC (e.g SLURM) you need to add some configuartion to the nextflow.config file
 
 e.g 
+```bash
 process.executor = 'slurm'
 process.clusterOptions = '--qos=short' # if you have to submit to a specific queue
-
+```
 
 ## Test Run
 
 A test dataset is available for testing and demonstration purposes. This dataset contains a phased genome assembly and annotation for chromosome 1 across all haplotypes of the tetraploid potato cultivar Atlantic.
 
 * long-read RNA-seq fastq files:
-Download from SRA the samples SRR14993893 and SRR14993894.
+    Download from SRA the samples SRR14993893 and SRR14993894.
 * genome and annotation files:
-- [fasta](https://zenodo.org/records/17590760/files/ATL_v3.asm.chr01_all_haplotypes.fa.gz?download=1&preview=1)
-- [gtf](https://zenodo.org/records/17590760/files/ATL_unitato_liftoff.chr01_all_haplotypes.gtf.gz?download=1&preview=1)
+    [fasta](https://zenodo.org/records/17590760/files/ATL_v3.asm.chr01_all_haplotypes.fa.gz?download=1&preview=1) and [gtf](https://zenodo.org/records/17590760/files/ATL_unitato_liftoff.chr01_all_haplotypes.gtf.gz?download=1&preview=1)
 
 First add samples to sample sheet, download the annotation files and then run the pipeline like this:
 
