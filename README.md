@@ -145,25 +145,24 @@ process.clusterOptions = '--qos=short' # if you have to submit to a specific que
 
 ## Test Run
 
-Download from SRA the samples SRR14993893 and SRR14993893.
+A test dataset is available for testing and demonstration purposes. This dataset contains a phased genome assembly and annotation for chromosome 1 across all haplotypes of the tetraploid potato cultivar Atlantic.
 
-/scratch/nadjafn/reference/Atlantic/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf
-download gtf file from zenodo: unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf
+* long-read RNA-seq fastq files:
+Download from SRA the samples SRR14993893 and SRR14993894.
+* genome and annotation files:
+- [fasta](https://zenodo.org/records/17590760/files/ATL_v3.asm.chr01_all_haplotypes.fa.gz?download=1&preview=1)
+- [gtf](https://zenodo.org/records/17590760/files/ATL_unitato_liftoff.chr01_all_haplotypes.gtf.gz?download=1&preview=1)
 
-and fasta: 
+First add samples to sample sheet, download the annotation files and then run the pipeline like this:
 
-/scratch/nadjafn/reference/Atlantic/ATL_v3.asm.with_chloroplast_and_mito.fa
-
-
-1) samples to sample sheet
-
-
+```bash
 nextflow run main.nf -profile singularity \
-                    --input assets/samplesheet.csv \
-                    --outdir output_test \
-                    --fasta test_data/ATL_v3.asm.with_chloroplast_and_mito.fa \
-                    --gtf  test_data/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf \
-                    --technology ONT --downsample_rate 0.99  --skip_centrifuge --skip_sqanti -resume 
+                        --input assets/samplesheet.csv \
+--outdir output_test \
+                        --fasta test_data/ATL_v3.asm.with_chloroplast_and_mito.fa \
+--gtf  test_data/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf \
+                        --technology ONT --downsample_rate 0.99  --skip_centrifuge --skip_sqanti -resume
+```
 
 This should finish in less than one hour (running with 30 cpu) including pulling of singularity images.
 
@@ -171,3 +170,6 @@ This should finish in less than one hour (running with 30 cpu) including pulling
 
 
 
+## Troubleshooting
+
+- if sqanit3_reads fails with an error like this ``"ImportError: /lib/x86_64-linux-gnu/libstdc++.so.6: version CXXABI_1.3.15' not found"` try running in the provided conda envrionment `sqanti3.yaml`
