@@ -48,9 +48,6 @@ workflow RUN_SQANTI_READS {
                         .combine(ch_gtf) // without .combine it is only run on the first sample
 
   
-        ch_sqanti_input.view()
-
-        gff_channel.view()
         SQANTIQC (
                     ch_sqanti_input.map { meta, gff, ref_meta, ref_file -> [meta, gff] },
                     ch_fasta,

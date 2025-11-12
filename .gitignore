@@ -17,3 +17,6 @@ tagged.bam.bai
 run.sh
 assets/samplesheet_*.csv
 run.sh
+SQANTI3.conda_env.yml
+.gitignore
+run.sh

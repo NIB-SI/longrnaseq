@@ -22,13 +22,13 @@ The pipeline includes the following main steps:
 An environment with nextflow (>=24.04.2) and Singularity installed.
 
 **Note:** If you want to run SQANTI-reads quality control, you will also need to:
-- Install all [SQANTI3 dependencies](https://github.com/ConesaLab/SQANTI3/blob/master/SQANTI3.conda_env.yml) in the same environment as nextflow/nf-core environment (sorry there is not functional container at the moment..)
+- Install all [SQANTI3 dependencies](https://github.com/ConesaLab/SQANTI3/blob/master/SQANTI3.conda_env.yml) in the same environment as nextflow/nf-core environment (sorry there is not functional container for nextflow at the moment..)
 *Important*: for converting output to html poppler also need to be installed: conda install poppler
 - Clone the [SQANTI3 git repository](https://github.com/ConesaLab/SQANTI3) and provide the directory as input. v >=5.5.1
 
 For running Centrifuge, you also need to create a [Centrifuge database](https://ccb.jhu.edu/software/centrifuge/manual.shtml).
 
-
+Both of these can be skipped with `--skip_sqanti` and `--skip_centrifuge`
 
 ## Usage
 
@@ -162,3 +162,10 @@ nextflow run main.nf -profile singularity \
                     --fasta test_data/ATL_v3.asm.with_chloroplast_and_mito.fa \
                     --gtf  test_data/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf \
                     --technology ONT --downsample_rate 0.99  --skip_centrifuge --skip_sqanti -resume 
+
+This should finish in less than one hour (running with 30 cpu) including pulling of singularity images.
+
+
+
+
+
