@@ -24,7 +24,7 @@ An environment with nextflow (>=24.04.2) and Singularity installed.
 **Note:** If you want to run SQANTI-reads quality control, you will also need to:
 - Install all [SQANTI3 dependencies](https://github.com/ConesaLab/SQANTI3/blob/master/SQANTI3.conda_env.yml) in the same environment as nextflow/nf-core environment (sorry there is not functional container for nextflow at the moment..)
 *Important*: for converting output to html poppler also need to be installed: conda install poppler
-- Clone the [SQANTI3 git repository](https://github.com/ConesaLab/SQANTI3) and provide the directory as input. v >=5.5.1
+- Clone the [SQANTI3 git repository](https://github.com/ConesaLab/SQANTI3)(>=5.5.1) and provide the directory as input.
 
 For running Centrifuge, you also need to create a [Centrifuge database](https://ccb.jhu.edu/software/centrifuge/manual.shtml).
 
@@ -59,7 +59,7 @@ The pipeline requires the following mandatory parameters:
 - `--gtf`: Path to GTF annotation file (for BAMBU to get the right output with gene_id!)
 - `--centrifuge_db`: Path to Centrifuge database
 - `--sqanti_dir`: Path to SQANTI3 directory
-- `--technology`: ONT or PacBio, sets minimap2 parameters for read mapping
+- `--technology`: ONT (Oxford Nanopore) or PacBio, sets minimap2 parameters for read mapping
 
 
 *Note about gtf file*
@@ -80,7 +80,7 @@ nextflow run main.nf -resume -profile singularity \
     --gtf /path/to/annotation.gtf \
     --centrifuge_db /path/to/centrifuge_db \
     --sqanti_dir /path/to/sqanti3 \
-    --technology ONT/PacBio \
+    --technology ONT/PacBio
 
 ```
 ##
@@ -97,7 +97,7 @@ nextflow run main.nf -resume -profile singularity \
 
 The main output is a MultiQC.html and oarfish transcript and gene counts.
 
-An example MultiQC report can be found here: `example MultiQC report <https://github.com/nadjano/longrnaseq/blob/master/example_output/multiqc_report.html>`_
+An example MultiQC report can be found [here](https://github.com/nadjano/longrnaseq/blob/master/example_output/multiqc_report.html)
 
 
 ## Tutorial
@@ -149,7 +149,7 @@ process.clusterOptions = '--qos=short' # if you have to submit to a specific que
 A test dataset is available for testing and demonstration purposes. This dataset contains a phased genome assembly and annotation for chromosome 1 across all haplotypes of the tetraploid potato cultivar Atlantic.
 
 * long-read RNA-seq fastq files:
-    Download from SRA the samples SRR14993893 and SRR14993894.
+    Download from SRA the samples ONT SRR14993893 and SRR14993894.
 * genome and annotation files:
     [fasta](https://zenodo.org/records/17590760/files/ATL_v3.asm.chr01_all_haplotypes.fa.gz?download=1&preview=1) and [gtf](https://zenodo.org/records/17590760/files/ATL_unitato_liftoff.chr01_all_haplotypes.gtf.gz?download=1&preview=1)
 
@@ -157,19 +157,21 @@ First add samples to sample sheet, download the annotation files and then run th
 
 ```bash
 nextflow run main.nf -profile singularity \
-                        --input assets/samplesheet.csv \
---outdir output_test \
-                        --fasta test_data/ATL_v3.asm.with_chloroplast_and_mito.fa \
---gtf  test_data/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf \
-                        --technology ONT --downsample_rate 0.99  --skip_centrifuge --skip_sqanti -resume
+                     --input assets/samplesheet.csv \
+                     --outdir output_test \
+                     --fasta test_data/ATL_v3.asm.with_chloroplast_and_mito.fa \
+                     --gtf  test_data/unitato2Atl.with_chloroplast_and_mito.no_scaffold.agat.gtf \
+                     --technology ONT \
+                     --downsample_rate 0.99 \
+                     --skip_centrifuge \
+                     --skip_sqanti \
+                     -resume 
 ```
 
 This should finish in less than one hour (running with 30 cpu) including pulling of singularity images.
 
 
-
-
-
 ## Troubleshooting
 
 - if sqanit3_reads fails with an error like this ``"ImportError: /lib/x86_64-linux-gnu/libstdc++.so.6: version CXXABI_1.3.15' not found"` try running in the provided conda envrionment `sqanti3.yaml`
+- if BAMBU fails check your gtf file and make sure it contains `gene_id`
