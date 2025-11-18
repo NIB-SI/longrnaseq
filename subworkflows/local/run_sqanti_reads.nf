@@ -29,7 +29,6 @@ workflow RUN_SQANTI_READS {
                 [], // qname
                 'csi' // index_format, for large genomes csi is required
                 )
-
   
         //
         // MODULES: RUN SPLICEDBAM2GFF
@@ -66,9 +65,6 @@ workflow RUN_SQANTI_READS {
             [metas, files]
         }
 
-
-
-
         SQANTIREADS (
                     combined_sqanti_ch,
                     ch_gtf
@@ -82,9 +78,6 @@ workflow RUN_SQANTI_READS {
         bam       = SAMTOOLS_FILTER.out.bam          // channel: [ val(meta), [ bam ], [ bai ] ]
         multiqc   =  SQANTIREADS.out.multiqc         // channel: [ _mqc.png ]
         versions  = ch_versions                      // channel: [ versions.yml ]
-
-    
-
 
 
 }

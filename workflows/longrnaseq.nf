@@ -187,6 +187,7 @@ workflow LONGRNASEQ {
                     ch_fasta,
                     ch_gtf
                     )
+    ch_versions = ch_versions.mix(NOVEL_TRANSCRIPT_IDENTIFICATION.out.versions.first())
 
     //
     // SUBWORKFLOW: Run SQANTI on reads and BAMBU annotation
@@ -197,7 +198,7 @@ workflow LONGRNASEQ {
                         ch_fasta.map { [ [:], it ] },
                         NOVEL_TRANSCRIPT_IDENTIFICATION.out.novel_gtf
                         )
-        // ch_versions = ch_versions.mix(RUN_SQANTI_READS.out.versions.first())
+        ch_versions = ch_versions.mix(RUN_SQANTI_READS.out.versions.first())
         ch_multiqc_files = ch_multiqc_files.mix(RUN_SQANTI_READS.out.multiqc.collect())
     }
     //
