@@ -26,7 +26,7 @@ An environment with nextflow (>=24.04.2) and Singularity installed.
 **Note:** If you want to run SQANTI-reads quality control, you will also need to:
 - Install all [SQANTI3 dependencies](https://github.com/ConesaLab/SQANTI3/blob/master/SQANTI3.conda_env.yml) in the same environment as nextflow/nf-core environment (sorry there is not functional container for nextflow at the moment..)
 *Important*: for converting output to html poppler also need to be installed: conda install poppler
-- Clone the [SQANTI3 git repository](https://github.com/ConesaLab/SQANTI3)(>=5.5.1) and provide the directory as input.
+- Clone the [SQANTI3 git repository](https://github.com/ConesaLab/SQANTI3)(=5.5.4) and provide the directory as input.
 
 For running Centrifuge, you also need to create a [Centrifuge database](https://ccb.jhu.edu/software/centrifuge/manual.shtml).
 
