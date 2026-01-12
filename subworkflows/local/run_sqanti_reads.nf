@@ -35,7 +35,7 @@ workflow RUN_SQANTI_READS {
         //
         SPLICEDBAM2GFF  ( SAMTOOLS_FILTER.out.bam
                         )
-        ch_versions = ch_versions.mix(SPLICEDBAM2GFF.out.versions.first())
+        // ch_versions = ch_versions.mix(SPLICEDBAM2GFF.out.versions.first()) // version is not correctly parsed
 
 
         //
