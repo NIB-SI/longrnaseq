@@ -158,19 +158,33 @@ def process_bam_two_pass(args):
             # Set tag based on type
             if args.tag == 'HP':
                 # HP tags should be integers
-                # Extract haplotype number from tag value (e.g., "group_chr4_1" -> 1)
-                # Format expected: prefix_chrX_N where N is the haplotype number
+                # Extract haplotype number from tag value
+                # Format examples: 
+                #   - "group_chr4_1" -> 1
+                #   - "BrgdChr01A" -> 1 (A=1, B=2, etc.)
                 try:
                     parts = tag_value.split('_')
                     # Get the last part and try to convert to int
-                    tag_value_int = int(parts[-1])
+                    last_part = parts[-1]
+                    
+                    # Try direct integer conversion first
+                    try:
+                        tag_value_int = int(last_part)
+                    except ValueError:
+                        # If that fails, try extracting from chromosome name
+                        # Look for alphabetic suffix (e.g., "BrgdChr01A" -> "A")
+                        if last_part and last_part[-1].isalpha():
+                            # Convert A=1, B=2, C=3, etc. (case-insensitive)
+                            tag_value_int = ord(last_part[-1].upper()) - ord('A') + 1
+                        else:
+                            # If still can't extract, use 0
+                            tag_value_int = 0
                 except (ValueError, IndexError):
                     # If can't extract integer, use 0
                     tag_value_int = 0
                 read.set_tag(args.tag, tag_value_int)
             else:
                 read.set_tag(args.tag, tag_value)
-
             tagged_reads += 1
         else:
             # No primary alignment found for this read
