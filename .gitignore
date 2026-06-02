@@ -18,3 +18,5 @@ run_DES_ATL_cds2exon_liftoff.sh
 assets/sample_sheet_brassica.csv
 assets/strawberry_samplesheet.csv
 conf/base.config
+conf/base.config
+conf/base.config
