@@ -13,11 +13,10 @@ template:
   description: This is a nextflow pipeline for the analysis of allele-specific expression
     in polyploid plants using long-read RNA-seq.
   force: true
-  is_nfcore: true
-  name: plantlongrnaseq
-  org: nf-core
+  is_nfcore: false
+  name: longrnaseq
   outdir: .
   skip_features:
   - igenomes
-  version: 1.0.0dev
+  version: 1.0.1
 update: null
