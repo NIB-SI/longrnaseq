@@ -14,3 +14,7 @@ tagged.bam.bai
 run.sh
 assets/samplesheet_*.csv
 SQANTI3.conda_env.yml
+run_DES_ATL_cds2exon_liftoff.sh
+assets/sample_sheet_brassica.csv
+assets/strawberry_samplesheet.csv
+conf/base.config

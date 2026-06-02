@@ -173,3 +173,5 @@ This should finish in less than one hour (running with 30 cpu) including pulling
 ## Troubleshooting
 
 - if sqanit3_reads fails with an error like this ``"ImportError: /lib/x86_64-linux-gnu/libstdc++.so.6: version CXXABI_1.3.15' not found"` try running in the provided conda envrionment `sqanti3.yaml`
+
+- if bambu produced a strange gtf file, make sure you have "gene_name" in your inital gtf file!

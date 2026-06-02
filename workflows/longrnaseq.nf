@@ -183,7 +183,7 @@ workflow LONGRNASEQ {
 
     // SUBWORKFLOW: Run novel transcript identification with BAMBU and liftoff
     NOVEL_TRANSCRIPT_IDENTIFICATION(
-                    MINIMAP2_ALIGN_GENOME.out.bam,
+                    MINIMAP2_ALIGN_GENOME.out.bam.join(MINIMAP2_ALIGN_GENOME.out.index),
                     ch_fasta,
                     ch_gtf
                     )

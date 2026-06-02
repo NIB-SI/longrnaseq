@@ -5,7 +5,7 @@
 include { BAMBU                                        } from '../../modules/local/bambu'
 include { GAWK                                         } from '../../modules/nf-core/gawk/main'
 include { SQANTIQC                                     } from '../../modules/local/sqanti/sqantiqc'
-include { SAMTOOLS_VIEW as SAMTOOLS_FILTER             } from '../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_VIEW as SAMTOOLS_FILTER_SUP         } from '../../modules/nf-core/samtools/view/main'
 include { LIFTOFF                                      } from '../../modules/nf-core/liftoff/main'
 include { GFFCOMPARE                                   } from '../../modules/nf-core/gffcompare/main'
 include { GFF_ATTR_RENAMING                            } from '../../modules/local/gff_attr_renaming/main'
@@ -25,11 +25,22 @@ workflow NOVEL_TRANSCRIPT_IDENTIFICATION {
     // Prepare channels for BAMBU
     //
     
+
+
+    // 
+    // MODULE: Filter secondary alignments from BAM files for BAMBU
+    //
+    SAMTOOLS_FILTER_SUP (
+                ch_bam,
+                ch_fasta.map { [ [:], it ]},
+                [], // qname
+                'csi' // index_format, for large genomes csi is required
+                )
+
     // Group BAM files by meta for BAMBU (which expects multiple BAM files)
-    ch_bam_grouped = ch_bam.toSortedList { a, b -> a[0].id <=> b[0].id }.map { it.collect { tuple -> tuple[1] } }
+    ch_bam_grouped = SAMTOOLS_FILTER_SUP.out.bam.toSortedList { a, b -> a[0].id <=> b[0].id }.map { it.collect { tuple -> tuple[1] } }
     // Prepare GTF with simplified meta for BAMBU
     ch_gtf_for_bambu = ch_gtf.map { gtf -> [["id": gtf.simpleName], gtf] }
-
     //
     // MODULE: Run BAMBU to reconstruct transcripts
     //
