@@ -10,7 +10,7 @@ process OARFISH {
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'community.wave.seqera.io/library/oarfish:0.9.0--4958b2b67f1dd777':
+        'community.wave.seqera.io/library/oarfish:0.10.0--6e68b4d7cecaf8da':
         'biocontainers/oarfish:0.10.0--hd727d2a_0' }"
 
 
